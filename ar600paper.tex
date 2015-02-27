@@ -44,7 +44,7 @@ Laboratory, I.Kant Baltic Federal University, Kaliningrad, Russia {\tt\small
 otolstel@kantiana.ru}}%
 }
 
-
+ 
 \begin{document}
 
 
@@ -116,9 +116,13 @@ some future work.
 
 \subsection{Dimensions and kinematics scheme}
 
-Weight of robot is about 55 kilograms.
-The overview of kinematic structure is shown in Fig.\ref{img:kinematic}, list of
-DOF is presented in Table 1.
+Height of robot is 155 cm, width is 38 cm, weight with batteries is 54
+kilograms.
+Not counting palm assembly robot has 26 degrees of freedom (see table
+\ref{tbl:DOFTable}).
+Palm asseblies have 5 fingers with 1 degree of freedom each. The overview of
+kinematic structure is shown in Fig.\ref{img:kinematic}.
+
  \begin{figure}[thpb]
       \centering
       \framebox{
@@ -131,7 +135,7 @@ DOF is presented in Table 1.
 
 \begin{table}[thpb]
     \caption{Joints degrees of freedom}
-    \label{table}
+    \label{tbl:DOFTable}
     \begin{center}
     \begin{tabular}{c | c c c}
         & degree of freedom & range of motion & \\
@@ -165,10 +169,12 @@ DOF is presented in Table 1.
 \subsection{Hardware selection}
 In order to place center of mass as close to hip joints as possible while
 carrying accumulator batteries in chest cage, aluminium alloy was selected for
-most inner structure elements. 
+most inner structure elements to make leg assemblies heavier and, thus, make
+load balance easier.
 
 Maxon motors actuate major joints thought belt transmission with tooth belts and
-pulley. Elbow and knee joints are shown on fig. \ref{img:joints}. 
+pulleys. Elbow and knee joints are shown on fig.
+\ref{img:joints}.
 
 \begin{figure}[h]
 \framebox{
@@ -184,16 +190,17 @@ pulley. Elbow and knee joints are shown on fig. \ref{img:joints}.
 \end{figure}
 
 Main controller board built on top of 3 STM 32F107 microcontrollers, minor
-driver controllers are built on STM 32F103 microcontrollers. Both types use
-Cortex-M3 ARM cpu and provide softwatre interfaces for hardware interaction. 
+driver controllers are built on STM 32F103 microcontrollers. Placement of
+controller boards is shown on fig. \ref{img:electronics}.  Both types use
+Cortex-M3 ARM cpu and provide softwatre interfaces for hardware interaction.
 
 Joint drives are accompanied by two encoders. Main encoder provides absolute
 position data with quite a broad error rate, supplementary encoder provides
 relative motion data for more accurate position estimation.
 
-IMU is Analog Devices ADIS 16400, placed just in center of mass to minimize
-number of transforms required for calculations. There are also CCD camera,
-speakers and microphone.
+IMU is Analog Devices ADIS 16400, placed just in center of mass. This point
+considered as base point of robot. There are
+also CCD camera, speakers, microphone and foot pressure sensors.
 
 \begin{figure}[thpb]
 \framebox{
@@ -221,7 +228,7 @@ tennis ball, Rubik`s cube or coffee cup, however there are
 another types of hands under development - palm assembly is under
 constant development.
 
-\begin{figure}[h]
+\begin{figure}[thpb]
 \framebox{
 \includegraphics[scale=0.07]{wrist}
 }
@@ -240,7 +247,7 @@ Avalue ECM-QM78 with Intel Core i7-4700EQ CPU and 8GB RAM, capable to carry out
 performance-demanding sensor-processing tasks. However, there is an option to
 connect any other PC via ethernet interface.
 
-\begin{figure}[h]
+\begin{figure}[thpb]
 \framebox{
 \includegraphics[scale=.5]{EthernetBus}}
 \caption{Controller boards}
@@ -259,9 +266,26 @@ commands and sensors data, so one can easily subscribe interact with robot via
 standard socket interface libraries.
 
 We already have a set of ROS packages including urdf description for Rviz,
-moveIt support for whole robot and hand assemblies, gazebo support, neural
-network and cascade-based vision, speech packets and set of drivers for direct
-robot interaction.
+moveIt support for whole robot and hand assemblies, gazebo support((Fig.
+\ref{img:moveitgazebo})), vision, speech packets and set of drivers for direct
+interaction with robot.
+Right now movement groups for hands, legs and head are available via
+MoveIt, PID-controllers available via ros-control
+interfaces. And we already have objects detector built over cascades and OpenCV.
+
+\begin{figure}[thpb] 
+\framebox{
+\begin{minipage}[h]{0.49\linewidth}
+\includegraphics[scale=.25]{moveit}
+\end{minipage}
+\hfill
+\begin{minipage}[h]{0.49\linewidth}
+\includegraphics[scale=.155]{gazebo}
+\end{minipage}
+}
+\caption{Moveit demo and Gazebo simulation.}
+\label{img:moveitgazebo}
+\end{figure}
 
 \section{CONCLUSIONS}
 
