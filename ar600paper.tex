@@ -114,6 +114,8 @@ This paper describes specifications of the robot, software developed so far and
 some future work.
 \section{SPECIFICATIONS OF AR-600}
 
+\subsection{Dimensions and kinematics scheme}
+
 Weight of robot is about 55 kilograms.
 The overview of kinematic structure is shown in Fig.\ref{img:kinematic}, list of
 DOF is presented in Table 1.
@@ -193,6 +195,13 @@ IMU is Analog Devices ADIS 16400, placed just in center of mass to minimize
 number of transforms required for calculations. There are also CCD camera,
 speakers and microphone.
 
+\begin{figure}[thpb]
+\framebox{
+\includegraphics[scale=.23]{controllers}}
+\caption{Controller boards}
+\label{img:electronics}
+\end{figure}  
+
 There is a frame on the chest, that allows to mount additional sensors like
 kinect or laser rangefinders, however there no holes in plastic cover for that.
 There also two small displays in head mount, that mimic eyes and eyebrows.
@@ -214,36 +223,30 @@ constant development.
 
 \begin{figure}[h]
 \framebox{
-\begin{minipage}[h]{0.49\linewidth}
-\includegraphics[scale=0.5]{palm}
-\end{minipage}
-\hfill
-\begin{minipage}[h]{0.49\linewidth}
-\includegraphics[scale=0.5]{wrist}
-\end{minipage}}
+\includegraphics[scale=0.07]{wrist}
+}
 \caption{Palm assembly}
 \label{img:wrist}
 \end{figure}  
 
 \subsection{Control PC and communication bus}
+
 Internal communications are built on ethernet. Controller boards are connected
 via Zigbee interfaces to switch, which governs internal network as shown
-in \ref{img:ethernet}.
+in fig. \ref{img:network}.
 
 There is also an embedded PC placed in back of robot and connected to same internal LAN. PC is
 Avalue ECM-QM78 with Intel Core i7-4700EQ CPU and 8GB RAM, capable to carry out
 performance-demanding sensor-processing tasks. However, there is an option to
 connect any other PC via ethernet interface.
 
-   \begin{figure}[thpb]
-      \centering
-      \framebox{
-        \includegraphics[scale=.5]{EthernetBus}
-      }
-      \caption{Internal network scheme}
-      \label{img:ethernet}
-   \end{figure}
-   
+\begin{figure}[h]
+\framebox{
+\includegraphics[scale=.5]{EthernetBus}}
+\caption{Controller boards}
+\label{img:network}
+\end{figure}  
+
 \section{SOFTWARE}
 
 Main software interface for controller boards is UDP with specially formed
