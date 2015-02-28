@@ -44,7 +44,7 @@ Laboratory, I.Kant Baltic Federal University, Kaliningrad, Russia {\tt\small
 otolstel@kantiana.ru}}%
 }
 
- 
+
 \begin{document}
 
 
@@ -59,7 +59,9 @@ otolstel@kantiana.ru}}%
 
 This article describes the hardware design and some of the software of
 autonomous humanoid robot AR-600. It is a full-sized humanoid robot that can be
-used in human-centered environment. 
+used in human-centered environment. It supports ROS and can be controlled via
+mimicking device. Collaborative work of several research institutions will bring
+more applications of the robot.
 
 \end{abstract}
 
@@ -112,6 +114,15 @@ platform. Some of the research topics are object grasping and bipedal walking.
 
 This paper describes specifications of the robot, software developed so far and
 some future work.
+
+\begin{figure} [thpb]
+      \centering
+      \framebox{
+      \includegraphics[scale=0.8]{suit}}
+      \caption{Mimicking device for the robot.}
+      \label{img:suit}
+\end{figure}
+
 \section{SPECIFICATIONS OF AR-600}
 
 \subsection{Dimensions and kinematics scheme}
@@ -188,12 +199,17 @@ pulleys. Elbow and knee joints are shown on fig.
 \caption{Elbow and knee assemblies}
 \label{img:joints}
 \end{figure}
+
 There are 3-DOF hip joints, which obtain movements from belt transmissions.
 Three motors driving a hip assembly are situated in leg segment and lower body,
 their positioning reminds position of musclules in corresponding human body
-part.
+parts.
+Elbow joints compose of two motors each - rotation motor assembly, directly
+arrached to harmonic drive reducer and flexion belt-transmission placed directly
+in joint axis.
 
-
+Head assembly has a 3-DOF joint powered by brushed motors in order to observe
+environment.
 
 Main controller board built on top of 3 STM 32F107 microcontrollers, minor
 driver controllers are built on STM 32F103 microcontrollers. Placement of
@@ -263,22 +279,30 @@ connect any other PC via ethernet interface.
 \section{SOFTWARE}
 
 Main software interface for controller boards is UDP with specially formed
-datagrams. There two types of datagrams - one is for commands transmission,
-another returns sensors data. Both UDP streams
-are independent.
+datagrams. There are two types of datagrams - one is for commands transmission,
+another returns sensors data. Both UDP streams are independent.
 
-Datagram types encapsulate specific byte array, which encode movement
-commands and sensors data, so one can easily subscribe interact with robot via
-standard socket interface libraries.
+Datagram types encapsulate specific byte arrays, which encode movement
+commands and sensors data, so anyone can easily interact with robot via standard
+socket interface libraries.
 
-We already have a set of ROS packages including urdf description for Rviz,
-moveIt support for whole robot and hand assemblies, gazebo support((Fig.
-\ref{img:moveitgazebo})), vision, speech packets and set of drivers for direct
-interaction with robot.
-Right now movement groups for hands, legs and head are available via
-MoveIt, PID-controllers available via ros-control
-interfaces. And we already have objects detector built over cascades and OpenCV.
+Support for Robot Operating System \cite{c2} is a key to make the robot
+available to the community and to benefit from open-source software. Not
+reinventing the wheel and applying ready-to-use navigation and planning
+solutions significantly increase speed of research and development for robotics
+laboratories that work with AR-600.
 
+Crossplatform drivers and ros\_control interface were implemented alongside
+with Rviz and Gazebo models(See fig. \ref{img:moveitgazebo}). Motion planning
+is based on MoveIt! package \cite{c3} that uses state-of-the-art planning libraries. One can test planning
+and obstacle avoidance for robot's limbs. Full body motion planner is under
+development. Ar600\_vision package is capable of detecting, recognizing and
+tracking human faces. Its implementation is based on cascade classifiers and
+OpenCV library \cite{c4}. Ar600\_speech package lets the robot engage in
+dialogue with people, answer simple predefined questions and execute motion or vision
+commands. Pocketsphinx engine \cite{c5} developed by CMU is used as a core of
+speech recognition for AR-600. ROS packages for the robot are not available for
+public yet, but they are expected to be released soon.
 \begin{figure}[thpb] 
 \framebox{
 \begin{minipage}[h]{0.49\linewidth}
@@ -340,8 +364,12 @@ used in robotics research and capable of working alongside with humans.
 \begin{thebibliography}{99}
 
 \bibitem{c1} Android Techniques. URL: http://en.npo-at.com/
-\bibitem{c2} ROS
-\bibitem{c3} MoveIt
+\bibitem{c2} M. Quigley, K. Conley, B. Gerkey, J. Faust, T. B. Foote, J. Leibs, R. Wheeler, and A. Y. Ng. ROS: an open-source robot operating system. In ICRA Workshop on Open Source Software, 2009.
+\bibitem{c3} Ioan A. Sucan and Sachin Chitta, "MoveIt!", [Online] Available: http://moveit.ros.org
+\bibitem{c4} G. Bradski. The OpenCV Library. Dr. Dobb’s Journal of Software
+Tools (2000) 
+\bibitem{c5} Huggins D. Daines, M. Kumar, A. Chan, et al. Pocketsphinx: A Free,
+Real-Time Continuous Speech Recognition System for Hand-Held Devices Acoustics, Speech and Signal Processing, 2006. ICASSP 2006 Proceedings. 2006 IEEE International Conference on, Vol. 1 (2006)
 
 
 \end{thebibliography}
