@@ -118,13 +118,11 @@ some future work.
 
 \section{SPECIFICATIONS OF AR-600}
 
-\subsection{Hardware architecture and kinematics}
-
 Height of the robot is 155 cm, its shoulder width is 38 cm, weight with
 batteries is 54 kilograms.
-Not counting palm assembly robot has 26 degrees of freedom (see table
-\ref{tbl:DOFTable}) with 13 degrees of freedom in lower part including legs and
-pelvis and 5-DOF hands. Head with sensors has 3 DOF. Palm asseblies have 5
+
+Robot has 36 degrees of freedom (see table \ref{tbl:DOFTable}) with 13 degrees
+of freedom in lower part including legs and pelvis and 5-DOF hands. Head with sensors has 3 DOF. Palm assemblies have 5
 fingers with 1 degree of freedom each.
 The overview of kinematic structure is shown in Fig.\ref{img:kinematic}.
 
@@ -133,40 +131,40 @@ The overview of kinematic structure is shown in Fig.\ref{img:kinematic}.
       \framebox{
         \includegraphics[scale=.5]{panview}
       }
-      \caption{Kinematic scheme}
+      \caption{AR-600 kinematic scheme}
       \label{img:kinematic}
    \end{figure}
  
 
 \begin{table}[thpb]
-    \caption{Joints degrees of freedom}
+    \caption{Joints degrees of freedom (excluding palms)}
     \label{tbl:DOFTable}
     \begin{center}
     \begin{tabular}{c | c c c}
-        & degree of freedom & range of motion & \\
+        & degree of freedom & range of motion, deg & \\
     \hline
         head & roll & -15 & 15 \\
             & tilt & -20 & 30 \\
             & pan & -90 & 90 \\
     \hline
-        shoulder &  pitch & 0 & 105\\
+        2 shoulders &  pitch & 0 & 105\\
                 & yaw & -15 & 90\\
     \hline
-        elbow & roll & -45 & +45 \\
+        2 elbows & roll & -45 & +45 \\
                 & flexion/extension & 0 & 130\\ 
     \hline
-        wrist & roll & -45 & 45 \\
+        2 wrists & roll & -45 & 45 \\
     \hline
         waist & yaw & -45 & 45 \\
     \hline
-        hip & abduction/adduction & -11 & 20 \\
+        2 hips & abduction/adduction & -11 & 20 \\
             & flexion/extension & 45 & -70 \\
             & rotation &-20 & 20\\
     \hline
-        knee & rotation & -140 & 0 \\
+        2 knees & rotation & -140 & 0 \\
     \hline
-        ankle & flexion/extension & -33 & 70 \\
-            & abduction/adduction & -20 & 11\\
+        2 ankles & flexion/extension & -33 & 70 \\
+            & abduction/adduction & -20 & 11\\            
     \end{tabular}
     \end{center}
 \end{table}
@@ -230,7 +228,7 @@ Cortex-M3 ARM CPUs and provide software interfaces for hardware interaction.
 \begin{figure}[thpb]
 \centering
 \framebox{
-\includegraphics[scale=.7]{controllers}}
+\includegraphics[scale=.67]{controllers}}
 \caption{Controller boards}
 \label{img:electronics}
 \end{figure}
@@ -259,7 +257,7 @@ in fig. \ref{img:network}.
 \centering
 \framebox{
 \includegraphics[scale=.5]{EthernetBus}}
-\caption{Internal network scheme.}
+\caption{Internal network scheme}
 \label{img:network}
 \end{figure}  
 
@@ -269,27 +267,13 @@ Main software interface for controller boards is UDP with specially formed
 datagrams. There are two types of datagrams - one is for commands transmission,
 another returns sensors data. Both UDP streams are independent.
 
-Datagram types encapsulate specific byte arrays, which encode movement
-commands and sensors data, so anyone can easily interact with robot via standard
-socket interface libraries.
-
-Support for Robot Operating System \cite{c2} is a key to make the robot
-available to the community and to benefit from open-source software. Not
-reinventing the wheel and applying ready-to-use navigation and planning
-solutions significantly increase speed of research and development for robotics
-laboratories that work with AR-600.
-
-Crossplatform drivers and ros\_control interface were implemented alongside
-with Rviz and Gazebo models(See fig. \ref{img:moveitgazebo}). Motion planning
-is based on MoveIt! package \cite{c3} that uses state-of-the-art planning libraries. One can test planning
-and obstacle avoidance for robot's limbs. Full body motion planner is under
-development. Ar600\_vision package is capable of detecting, recognizing and
-tracking human faces. Its implementation is based on cascade classifiers and
-OpenCV library \cite{c4}. Ar600\_speech package lets the robot engage in
-dialogue with people, answer simple predefined questions and execute motion or vision
-commands. Pocketsphinx engine \cite{c5} developed by CMU is used as a core of
-speech recognition for AR-600. ROS packages for the robot are not available for
-public yet, but they are expected to be released soon.
+\begin{figure}[thpb]
+\centering
+\framebox{
+\includegraphics[scale=.7]{software}}
+\caption{AR-600 software architecture.}
+\label{img:software}
+\end{figure}
 
 \begin{figure}[thpb] 
 \framebox{
@@ -301,9 +285,31 @@ public yet, but they are expected to be released soon.
 \includegraphics[scale=.155]{gazebo}
 \end{minipage}
 }
-\caption{MoveIt demo and Gazebo simulation of AR-600.}
+\caption{MoveIt demo and Gazebo simulation of AR-600}
 \label{img:moveitgazebo}
 \end{figure}
+
+Datagram types encapsulate specific byte arrays, which encode movement
+commands and sensors data, so anyone can easily interact with robot via standard
+socket interface libraries.
+
+Support for Robot Operating System \cite{c2} is a key to make the robot
+available to the community and to benefit from open-source software. Not
+reinventing the wheel and applying ready-to-use navigation and planning
+solutions significantly increase speed of research and development for robotics
+laboratories that work with AR-600.
+
+AR-600 software architecture is shown on fig. \ref{img:software}. Crossplatform
+drivers and ros\_control interface were implemented alongside with Rviz and
+Gazebo models (see fig. \ref{img:moveitgazebo}). Motion planning is based on MoveIt! package \cite{c3} that uses state-of-the-art planning libraries. One can test planning
+and obstacle avoidance for robot's limbs. Full body motion planner is under
+development. Ar600\_vision package is capable of detecting, recognizing and
+tracking human faces. Its implementation is based on cascade classifiers and
+OpenCV library \cite{c4}. Ar600\_speech package lets the robot engage in
+dialogue with people, answer simple predefined questions and execute motion or vision
+commands. Pocketsphinx engine \cite{c5} developed by CMU is used as a core of
+speech recognition for AR-600. ROS packages for the robot are not available for
+public yet, but they are expected to be released soon.
 
 \section{CONCLUSIONS}
 
@@ -327,7 +333,7 @@ used in robotics research and capable of working alongside with humans.
       \centering
       \framebox{
       \includegraphics[scale=1]{ar600e}}
-      \caption{AR-600E robot.}
+      \caption{AR-600E robot}
       \label{img:ar600e}
 \end{figure}
 
