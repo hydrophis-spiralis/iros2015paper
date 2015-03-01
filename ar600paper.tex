@@ -81,8 +81,9 @@ can interact with humans and operate in human infrastructure.
 It was designed to have a size of a 14-16 years old teenager. And that was done
 by purpose. Robot that is a bit smaller than a typical human can be treated
 with all respect like a younger brother who's trying to help in everyday
-routine. Looking at the robot from above will lead to a better attitude while
-communicating with it. 
+routine. Looking at the robot from above will lead to a better attitude
+while communicating with it. Exterior was designed to avoid uncanny valley
+effects and not to scare people away.
   
 \begin{figure} [thpb]
       \centering
@@ -119,8 +120,8 @@ some future work.
 
 \subsection{Hardware architecture and kinematics}
 
-Height of the robot is 155 cm, its width is 38 cm, weight with batteries is 54
-kilograms.
+Height of the robot is 155 cm, its shoulder width is 38 cm, weight with
+batteries is 54 kilograms.
 Not counting palm assembly robot has 26 degrees of freedom (see table
 \ref{tbl:DOFTable}) with 13 degrees of freedom in lower part including legs and
 pelvis and 5-DOF hands. Head with sensors has 3 DOF. Palm asseblies have 5
@@ -176,7 +177,7 @@ used for inner structure elements to achieve balance of weight and
 endurance.
 Maxon motors actuate major joints through belt transmission and harmonic drive
 reducers to obtain desired torque and movement speeds.
-Pelvis and torso are connected via rotational joint.
+
 Hip joints have 3 degrees of freedom each, obtaining movements from belt
 transmissions of drives. Three motors driving a hip assembly are
 situated in leg segment and lower body, flexion/extension drive is situated
@@ -191,6 +192,7 @@ Shoulder joint assembly has 2 degrees of freedom, with both axes actuated by
 toothed belt transmission.
 Head assembly has a 3-DOF joint powered by brushed
 motors in order to observe environment.
+Exterior parts are made from 3D-printed plastic parts painted white.
 
 \begin{figure}[thpb]
 \centering
@@ -237,9 +239,9 @@ Joint drives are accompanied by two encoders. Main encoder provides absolute
 position data with quite a broad error rate, supplementary encoder provides
 relative motion data for more accurate position estimation.
  
-Robot is equipped with CCD camera, speakers, microphone and pressure sensors
-on its feet and fingertips. As an IMU an Analog Devices ADIS 16400 is used, it
-is placed just in the center of mass. This point is considered as a base point of the robot. 
+Robot is equipped with CCD camera, speakers, microphone, pressure sensors
+on its feets and fingertips and proximity sensors in hands. As an IMU an Analog
+Devices ADIS 16400 is used, it is placed just in the center of mass. This point is considered as a base point of the robot. 
 
 Additional sensors like Kinect or laser range finders could be placed in chest
 frame. Two small displays in headmount mimic eyes and eyebrows.
