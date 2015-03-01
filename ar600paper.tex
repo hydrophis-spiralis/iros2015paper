@@ -58,10 +58,10 @@ otolstel@kantiana.ru}}%
 \begin{abstract}
 
 This article describes the hardware design and some of the software of
-autonomous humanoid robot AR-600. It is a full-sized humanoid robot that can be
-used in human-centered environment. It supports ROS and can be controlled via
-mimicking device. Collaborative work of several research institutions will bring
-more applications of the robot.
+autonomous humanoid robot AR-600. It is a full-sized humanoid that can be
+used in human-centered environment. It can be controlled via
+mimicking device. This robot supports ROS and is a good choice for
+humanoid robotics research.
 
 \end{abstract}
 
@@ -96,7 +96,7 @@ communicating with it.
 Abilities of robots to accomplish certain tasks autonomously relies mostly on
 a high level software that implements all the best from the field of artificial
 intelligence. The other way that allows to use robots now is to make them mimic
-our moves like avatars. Our AR-600 robot can be controlled by a developed
+our moves like avatars. Presented AR-600 robot can be controlled by a developed
 mimicking device (fig. \ref{img:suit}). It sends joint angles to robot and
 gets back force feedback and video stream. With this ``suit'' on an
 operator can naturally control the upperbody of the robot and use it to manipulate tools in uninhabitable or hazardous environments (e.g. welding or screwing).
@@ -119,7 +119,7 @@ some future work.
 
 \subsection{Dimensions and kinematics scheme}
 
-Height of robot is 155 cm, width is 38 cm, weight with batteries is 54
+Height of the robot is 155 cm, its width is 38 cm, weight with batteries is 54
 kilograms.
 Not counting palm assembly robot has 26 degrees of freedom (see table
 \ref{tbl:DOFTable}).
@@ -169,81 +169,36 @@ kinematic structure is shown in Fig.\ref{img:kinematic}.
     \end{center}
 \end{table}
 
-\subsection{Hardware selection}
+\subsection{Hardware architecture}
 In order to place center of mass as close to hip joints as possible while
 carrying accumulator batteries in chest cage, aluminium alloy was selected for
 most inner structure elements to make leg assemblies heavier and, thus, make
 load balance easier.
 
-Maxon motors actuate major joints thought belt transmission and harmonic drive
-reducers to obtain desired torques and movements speeds.
-Elbow and knee joints are shown on fig.
-\ref{img:joints}.
+Maxon motors actuate major joints through belt transmission and harmonic drive
+reducers to obtain desired torque and movement speeds.
 
-\begin{figure}[h]
+\begin{figure}[thpb]
+\centering
 \framebox{
-\begin{minipage}[h]{0.49\linewidth}
-    \center{\includegraphics[scale=.5]{ElbowAssembly}}
-\end{minipage}
-\hfill
-\begin{minipage}[h]{0.49\linewidth}
-    \center{\includegraphics[scale=.5]{knee}}
-\end{minipage}}
-\caption{Elbow and knee assemblies}
+\includegraphics[scale=.5]{ElbowAssembly}}
+\caption{Elbow assembly}
 \label{img:joints}
 \end{figure}
 
 There are 3-DOF hip joints, which obtain movements from belt transmissions.
 Three motors driving a hip assembly are situated in leg segment and lower body,
-their positioning reminds position of musclules in corresponding human body
+their positioning reminds position of muscles in corresponding human body
 parts.
-Elbow joints compose of two motors each - rotation motor assembly, directly
-arrached to harmonic drive reducer and flexion belt-transmission placed directly
-in joint axis.
+Elbow joints are composed of two motors each - rotation motor assembly, directly
+attached to Harmonic drive reducer, and flexion belt-transmission, placed
+directly in joint axis (fig. \ref{img:joints}).
+Ankle assembly has one belt transmission motor and motor, directly connected
+to harmonic drive.
 Shoulder joint assembly has 2 degrees of freedom, with both axes actuated by
 toothed belt transmission.
-Ankle assembly has one belt transmission motor and motor, directly connected
-to harmonic drive. Head assembly has a 3-DOF joint powered by brushed
+Head assembly has a 3-DOF joint powered by brushed
 motors in order to observe environment.
-
-Main controller board built on top of 3 STM 32F107 microcontrollers, minor
-driver controllers are built on STM 32F103 microcontrollers. Placement of
-controller boards is shown on fig. \ref{img:electronics}.  Both types use
-Cortex-M3 ARM cpu and provide softwatre interfaces for hardware interaction.
-
-Joint drives are accompanied by two encoders. Main encoder provides absolute
-position data with quite a broad error rate, supplementary encoder provides
-relative motion data for more accurate position estimation.
-
-IMU is Analog Devices ADIS 16400, placed just in center of mass. This point
-considered as base point of robot. There are
-also CCD camera, speakers, microphone and foot pressure sensors.
-
-\begin{figure}[thpb]
-\framebox{
-\includegraphics[scale=.23]{controllers}}
-\caption{Controller boards}
-\label{img:electronics}
-\end{figure}  
-
-There is a frame on the chest, that allows to mount additional sensors like
-kinect or laser rangefinders, however there no holes in plastic cover for that.
-There also two small displays in head mount, that mimic eyes and eyebrows.
-
-\subsection{Power}
-Robot can run on internal LiFePo cells assembly as well as on external power
-source. Main voltage is 48V, individual parts operate with 6V, 8V and 12V.
-Autonomous work time depends on many factors, but typically robot can run for a
-30-40 minutes.
- 
-\subsection{Wrist and palm assembly}
-Robot has palms with five fingers one opposite to another four. All
-finger motors are placed in wrist-elbow section, movement of motor translated to finger
-via system of strings(fig. \ref{img:wrist}). This system limits wrist rotation,
-but makes whole assembly significantly lighter. Our current arm is capable to grab objects like
-tennis ball, Rubik`s cube or coffee cup, however there are
-another types of hands under development - palm assembly is under
-constant development.
 
 \begin{figure}[thpb]
 \framebox{
@@ -251,20 +206,55 @@ constant development.
 }
 \caption{Palm assembly}
 \label{img:wrist}
-\end{figure}  
+\end{figure} 
 
-\subsection{Control PC and communication bus}
+Robot has palms with five fingers, one is opposite to another four. All
+finger motors are placed in wrist-elbow section, Motor movements are
+translated to fingers via system of strings (fig. \ref{img:wrist}). This system
+limits wrist rotation, but makes whole assembly significantly lighter. This arm
+is capable of grabbing objects like tennis ball, coffee cup or screw. However the next
+version of hand is going to be more powerful. It will be released soon - palm
+assembly is under constant development.
 
-Internal communications are built on ethernet. Controller boards are connected
-via Zigbee interfaces to switch, which governs internal network as shown
-in fig. \ref{img:network}.
+On-board PC is placed in the back of the robot. It is Avalue ECM-QM78 with Intel
+Core i7-4700EQ CPU and 8GB RAM, capable of carrying out performance-demanding
+sensor-processing tasks. 
 
-There is also an embedded PC placed in back of robot and connected to same internal LAN. PC is
-Avalue ECM-QM78 with Intel Core i7-4700EQ CPU and 8GB RAM, capable to carry out
-performance-demanding sensor-processing tasks. However, there is an option to
-connect any other PC via ethernet interface.
+Main controller board is built on top of 3 STM 32F107 microcontrollers, minor
+driver controllers are built on STM 32F103 microcontrollers. Placement of
+controller boards is shown on fig. \ref{img:electronics}.  All controllers use
+Cortex-M3 ARM CPUs and provide software interfaces for hardware interaction.
 
 \begin{figure}[thpb]
+\centering
+\framebox{
+\includegraphics[scale=.35]{controllers}}
+\caption{Controller boards}
+\label{img:electronics}
+\end{figure}
+
+Joint drives are accompanied by two encoders. Main encoder provides absolute
+position data with quite a broad error rate, supplementary encoder provides
+relative motion data for more accurate position estimation.
+
+Robot is equipped with CCD camera, speakers, microphone and pressure sensors
+on its feet and fingertips. As an IMU an Analog Devices ADIS 16400 is used, it
+is placed just in the center of mass. This point is considered as a base point of the robot. 
+
+Additional sensors like Kinect or laser range finders could be placed in chest
+frame. Two small displays in headmount mimic eyes and eyebrows.
+
+AR-600 can run on internal LiFePo cells battery as well as on external power
+source. Main voltage is 48V, individual parts operate with 6V, 8V and 12V.
+Autonomous work time depends on many factors, but typically robot can run for a
+30-40 minutes.
+
+Internal communications are built on Ethernet. Controller boards are connected
+via Zigbee interfaces to a switch, which governs internal network as shown
+in fig. \ref{img:network}.
+
+\begin{figure}[thpb]
+\centering
 \framebox{
 \includegraphics[scale=.5]{EthernetBus}}
 \caption{Internal network scheme.}
@@ -298,6 +288,7 @@ dialogue with people, answer simple predefined questions and execute motion or v
 commands. Pocketsphinx engine \cite{c5} developed by CMU is used as a core of
 speech recognition for AR-600. ROS packages for the robot are not available for
 public yet, but they are expected to be released soon.
+
 \begin{figure}[thpb] 
 \framebox{
 \begin{minipage}[h]{0.49\linewidth}
@@ -308,7 +299,7 @@ public yet, but they are expected to be released soon.
 \includegraphics[scale=.155]{gazebo}
 \end{minipage}
 }
-\caption{Moveit demo and Gazebo simulation.}
+\caption{MoveiT demo and Gazebo simulation of AR-600.}
 \label{img:moveitgazebo}
 \end{figure}
 
