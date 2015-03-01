@@ -117,14 +117,15 @@ some future work.
 
 \section{SPECIFICATIONS OF AR-600}
 
-\subsection{Dimensions and kinematics scheme}
+\subsection{Hardware architecture and kinematics}
 
 Height of the robot is 155 cm, its width is 38 cm, weight with batteries is 54
 kilograms.
 Not counting palm assembly robot has 26 degrees of freedom (see table
-\ref{tbl:DOFTable}).
-Palm asseblies have 5 fingers with 1 degree of freedom each. The overview of
-kinematic structure is shown in Fig.\ref{img:kinematic}.
+\ref{tbl:DOFTable}) with 13 degrees of freedom in lower part including legs and
+pelvis and 5-DOF hands. Head with sensors has 3 DOF. Palm asseblies have 5
+fingers with 1 degree of freedom each.
+The overview of kinematic structure is shown in Fig.\ref{img:kinematic}.
 
  \begin{figure}[thpb]
       \centering
@@ -169,21 +170,18 @@ kinematic structure is shown in Fig.\ref{img:kinematic}.
     \end{center}
 \end{table}
 
-\subsection{Hardware architecture}
 In order to place center of mass as close to hip joints as possible while
-carrying accumulator batteries in chest cage, aluminium alloy was selected for
-most inner structure elements to make leg assemblies heavier and, thus, make
-load balance easier.
-
+carrying accumulator batteries in chest cage, aluminium and steel alloys were
+used for inner structure elements to achieve balance of weight and
+endurance.
 Maxon motors actuate major joints through belt transmission and harmonic drive
 reducers to obtain desired torque and movement speeds.
+Pelvis and torso are connected via rotational joint.
+Hip joints have 3 degrees of freedom each, obtaining movements from belt
+transmissions of drives. Three motors driving a hip assembly are
+situated in leg segment and lower body, flexion/extension drive is situated
+in leg segment, other two are situated in pelvis segment.
 
-
-
-There are 3-DOF hip joints, which obtain movements from belt transmissions.
-Three motors driving a hip assembly are situated in leg segment and lower body,
-their positioning reminds position of muscles in corresponding human body
-parts.
 Elbow joints are composed of two motors each - rotation motor assembly, directly
 attached to Harmonic drive reducer, and flexion belt-transmission, placed
 directly in joint axis (fig. \ref{img:joints}).
