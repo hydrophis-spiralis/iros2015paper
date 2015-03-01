@@ -87,7 +87,7 @@ communicating with it.
 \begin{figure} [thpb]
       \centering
       \framebox{
-      \includegraphics[scale=0.2]{ar600}}
+      \includegraphics[scale=0.4]{ar600}}
       \caption{Antropomorphic robot AR-600.}
       \label{img:ar600}
 \end{figure}
@@ -178,13 +178,7 @@ load balance easier.
 Maxon motors actuate major joints through belt transmission and harmonic drive
 reducers to obtain desired torque and movement speeds.
 
-\begin{figure}[thpb]
-\centering
-\framebox{
-\includegraphics[scale=.5]{ElbowAssembly}}
-\caption{Elbow assembly}
-\label{img:joints}
-\end{figure}
+
 
 There are 3-DOF hip joints, which obtain movements from belt transmissions.
 Three motors driving a hip assembly are situated in leg segment and lower body,
@@ -199,6 +193,14 @@ Shoulder joint assembly has 2 degrees of freedom, with both axes actuated by
 toothed belt transmission.
 Head assembly has a 3-DOF joint powered by brushed
 motors in order to observe environment.
+
+\begin{figure}[thpb]
+\centering
+\framebox{
+\includegraphics[scale=.5]{ElbowAssembly}}
+\caption{Elbow assembly}
+\label{img:joints}
+\end{figure}
 
 \begin{figure}[thpb]
 \framebox{
@@ -228,7 +230,7 @@ Cortex-M3 ARM CPUs and provide software interfaces for hardware interaction.
 \begin{figure}[thpb]
 \centering
 \framebox{
-\includegraphics[scale=.35]{controllers}}
+\includegraphics[scale=.7]{controllers}}
 \caption{Controller boards}
 \label{img:electronics}
 \end{figure}
@@ -236,7 +238,7 @@ Cortex-M3 ARM CPUs and provide software interfaces for hardware interaction.
 Joint drives are accompanied by two encoders. Main encoder provides absolute
 position data with quite a broad error rate, supplementary encoder provides
 relative motion data for more accurate position estimation.
-
+ 
 Robot is equipped with CCD camera, speakers, microphone and pressure sensors
 on its feet and fingertips. As an IMU an Analog Devices ADIS 16400 is used, it
 is placed just in the center of mass. This point is considered as a base point of the robot. 
@@ -299,7 +301,7 @@ public yet, but they are expected to be released soon.
 \includegraphics[scale=.155]{gazebo}
 \end{minipage}
 }
-\caption{MoveiT demo and Gazebo simulation of AR-600.}
+\caption{MoveIt demo and Gazebo simulation of AR-600.}
 \label{img:moveitgazebo}
 \end{figure}
 
